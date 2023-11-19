@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="RDP.CSS">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="./products.js"></script>
+    <title>Mock Webstore</title>
+
+</head>
+<body>
+    <div class="banner">
+    <h2> Hello</h2>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="index.html">Victor's Dope Webstore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RPD.html">Products</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+
+    <div class="container">
+        <br>
+        <br>
+        <h3 id="errMsg" style="color: #ff2e2e;"></h3>
+        <br>
+        <!-- PRODUCT CARDS-->
+        <form action="process_purchase" method="POST" name="qty_form" class="qty_form">
+            <div class="row"></div>
+            <input type="submit" value="Purchase" class="sm-button highlight">
+        </form>
+    </div>
+</body>
+<footer class="bg-dark text-light text-center py-3">
+    <p>&copy; 2023 Mock Webstore</p>
+    <script src="RPD.js"></script>
+
+</footer>
+
+
+<!-- -->
