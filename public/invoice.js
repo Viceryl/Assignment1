@@ -3,6 +3,8 @@ let params = (new URL(document.location)).searchParams;
 
 // On load, if there is no 'valid' key, redirect the user back to the Home page
 window.onload = function() {
+    document.write(params.has('valid')
+    )
     if (!params.has('valid')) {
         document.write(`
             <head>
@@ -16,25 +18,24 @@ window.onload = function() {
     }
 }
 
-//
-window.onload= function(){
-    console.log
-}
-//
-
+//declare subtotal variable
 let subtotal = 0;
 
+//create qty array from form data
 let qty = [];
-for (let i in products) {
-    qty.push(params.get(`qty${i}`));
+for (let i in products) {//loop through products (s-o)
+    qty.push(params.get(`qty${i}`)); //push data to array
 }
 
+
 for (let i in qty) {
-    if (qty[i] == 0 || qty[i] == '') continue;
+    if (qty[i] == 0 || qty[i] == '') continue;// Skip values of 0 or non inputs
 
-    extended_price = (params.get(`qty${i}`) * products[i].price).toFixed(2);
-    subtotal += Number(extended_price);
+    //Formulas for invoice
+    extended_price = (params.get(`qty${i}`) * products[i].price).toFixed(2);// Calc Xprice for each item
+    subtotal += Number(extended_price); // add Xprices for Subtotal
 
+    //generate table from html
     document.querySelector('#invoiceTable').innerHTML += `
         <tr style="border: none;">
         <td width="10%">
@@ -58,6 +59,7 @@ for (let i in qty) {
     `;
 }
  
+//functions for showing and hiding image hover popups
 function showPopup(element) {
     let idd=element.id
     let popup = document.getElementById(`${idd}-popup`);
@@ -76,12 +78,12 @@ let tax_rate = (4.7/100);
 let tax_amt = subtotal * tax_rate;
 
 // Shipping
-if (subtotal < 300) {
+if (subtotal < 100) {
     shipping = 5;
     shipping_display = `$${shipping.toFixed(2)}`;
     total = Number(tax_amt + subtotal + shipping);
 }
-else if (subtotal >= 300 && subtotal < 500) {
+else if (subtotal >= 100 && subtotal < 300) {
     shipping = 10;
     shipping_display = `$${shipping.toFixed(2)}`;
     total = Number(tax_amt + subtotal + shipping);
@@ -92,6 +94,7 @@ else {
     total = Number(tax_amt + subtotal + shipping);
 }
 
+//fill out Final details(subtotal, tax, shippig, Total) of html
 document.querySelector('#table_bottom').innerHTML += `
     <tr style="border-top: 2px solid black;">
         <td colspan="5" style="text-align:center;">Sub-total</td>
