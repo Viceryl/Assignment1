@@ -6,7 +6,7 @@ body {
     font-size: 20px;
     overflow: auto;
     position: relative;
-    background-color: #f7fcff;
+    background-color: lightcoral;
     color: blue;
 }
 
@@ -137,3 +137,4 @@ header {
         font-size: 16px;
     }
 }
+
