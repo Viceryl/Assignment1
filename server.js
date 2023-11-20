@@ -7,7 +7,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const qs = require('qs');
-//
 
 app.use(express.static(__dirname + '/public')); // express use public directory
 
@@ -25,23 +24,7 @@ app.get('/products.js', function (request, response, next) {
     response.send(products_str);
 });
 
-app.post("/quantity_check", (req, res) => {
-    const inputValue = req.body.input;
-    const sourceValue = req.body.source;
 
-    console.log(`Received input from client: ${inputValue}`);
-    console.log(`Received input from client: ${sourceValue}`);
-    res.json({ message: 'Server received the input'+ `${inputValue} + ${sourceValue}`});
-}        
-)
-function ValidateStock(quantity){
-    let order=quantity
-    let stock=Number(products[Number(quantity.name.slice(3))].qty_available)
-
-if(order>stock){
-return "Purchase Limit";
-} else { return " "}
-}
 
 //Process purchase
 app.post("/process_purchase", function(request, response){//set up request path
