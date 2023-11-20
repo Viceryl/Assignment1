@@ -150,3 +150,11 @@ header {
 .icon-container {
     position: relative;
   }
+
+  footer{ 
+    #footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+  }
