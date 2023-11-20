@@ -54,7 +54,7 @@ app.post("/process_purchase", function(request, response){//set up request path
     } 
 
     else {console.log("a")
-      response.redirect("./RPD.html?" + qs.stringify(POST));
+      response.redirect("./RPD.html?" + qs.stringify(POST)); //redirect to Products page if error
     }
 
   }
@@ -78,3 +78,4 @@ function Validateinput(quantity){
         return ""; // no errors
       };
     }
+

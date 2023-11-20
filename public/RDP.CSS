@@ -13,13 +13,13 @@ fill: blue;}
   border: 3px solid rgb(255, 255, 255);
   padding: 10px;
 background-color: rgb(255, 255, 255);
+text-align: center;
 }
-
-
 
 .title_div{
     background-color: rgb(249, 164, 227);
     padding-top:5% ;
+    text-align: center;
 }
 
 
