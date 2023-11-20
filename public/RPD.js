@@ -1,8 +1,8 @@
 
-//JUST LOOP to populate
+// Populate Store Front
 
+//use loop to generate html with reference to product data 
 for (let i = 0; i < products.length; i++) {
-    //console.log(i)
     document.querySelector('.row').innerHTML += `
                                         <!-- Product Card Section-->
         <div class="col-md-6 product_card" style="margin-bottom: 40px; padding: 15px;">
@@ -60,10 +60,9 @@ for (let i = 0; i < products.length; i++) {
 }
 
 
-    function sendToServer(Data) {
-        console.log("a")
-
-        // Get the input value
+function sendToServer(Data) {
+    console.log("a")
+         // Get the input value
         let inputValue = Data.value;
         let source = Data.id
         console.log(inputValue)
@@ -89,18 +88,18 @@ for (let i = 0; i < products.length; i++) {
         
     }
 
+// fuction to validate input and quantity data
 
-function checkInputTextbox(Data){
-    let Error= Validateinput( (Data.value));
-    document.getElementById(Data.name+`_error`).innerHTML=Error
+function checkInputTextbox(Data){ //declare function, Data will be the input tag for the textbox in quextion
+    let Error= Validateinput( (Data.value));// retrieve value of texbox(Data) and validate it in Validateinput-f
+    document.getElementById(Data.name+`_error`).innerHTML=Error//Apply output to HTMLDOM
 
-    let overStock= ValidateStock(Data)
-    //console.log(overStock)
-    if(overStock!=" "){
-document.getElementById(Data.name+`_error`).innerHTML=overStock
-Data.value=Number(products[Number(Data.name.slice(3))].qty_available)
+    let overStock= ValidateStock(Data)//// retrieve value of texbox(Data) and check stock using validatestock-f
+    if(overStock!=" "){//condition: error occurs
+    document.getElementById(Data.name+`_error`).innerHTML=overStock///Apply output to HTMLDOM
+    Data.value=Number(products[Number(Data.name.slice(3))].qty_available)//replace value of textbox with qty available
     }
-
+//Restyle errored boxes
     if(document.getElementById(Data.name+`_error`).innerHTML!==" "){
         document.getElementById(Data.name+`Round`).style.border="2px solid red"
     } else {
@@ -110,7 +109,7 @@ Data.value=Number(products[Number(Data.name.slice(3))].qty_available)
 }
 
 
-
+//Validates for possitive intergers
 function Validateinput(quantity){
     quantity=Number(quantity)
     if (isNaN(quantity)) {
@@ -127,56 +126,44 @@ function Validateinput(quantity){
 }
 
 
-
+//Compares textbox value to quantity available
 function ValidateStock(quantity){
     let order=quantity.value
     let stock=Number(products[Number(quantity.name.slice(3))].qty_available)
 
-if(order>stock){
-return "Purchase Limit";
-} else { return " "}
+//if order exceeds auantity available returnsa an error otherwise return empty
+    if(order>stock){
+    return "Purchase Limit";}
+    else { return " "}
 }
-
-
-
-// Validation of inputr
-
-
 
 //windows onload Validation
-let params = (new URL(document.location)).searchParams;
-window.onload = function() {
-  //  console.log(params+"params")
-console.log(params)
-    let qty = [];
-    for (let i in products) {
-        qty.push(params.get(`qty${i}`));
-        console.log(params.get(`qty${i}`))
+let params = (new URL(document.location)).searchParams;// Extract parameters from url
+window.onload = function() {//call fuction on load
+    let qty = [];//create qty array to store param data
+    for (let i in products) {// loop through param data
+        qty.push(params.get(`qty${i}`));// push param data to qty array
 }
-console.log(qty)
 
-if (qty.some(q => q !== null)) {
-    if (qty.every(q => q == 0)){
-        document.getElementById("errMsg").innerHTML="Select a purchase quantity"
+// Detect and display error banner
+if (qty.some(q => q !== null)) {//detect if qty has any values (qty should only have values if the form was submitted previously, new forms are excepmt from error banners)
+    if (qty.every(q => q == 0)){//if there are values, detect if all values are 0
+        document.getElementById("errMsg").innerHTML="Select a purchase quantity" //let them know they made no purchase
     } 
     else{
-        if (qty.some(q => q !== 0)){
-        document.getElementById("errMsg").innerHTML="Invalid Purchase: Purchase quantity must be a positive interger"
+        if (qty.some(q => q !== 0)){// detect if values contain non 0
+        document.getElementById("errMsg").innerHTML="Invalid Purchase: Purchase quantity must be a positive interger"// if so display invalid number error banner (this should only trigger if a user clicks purchase with an invalib number)
         }
     }
 }
 
-
-//else {document.getElementById("errMsg").innerHTML="Please select a purchase quantity"
-
-
+//re-enter answers from previous form into repective textboxes
 for ([i] in qty){
     text_Value=Number(qty[i])
     textbox=document.getElementById(`qty${[i]}_entered`)
 textbox.value=text_Value;
-checkInputTextbox(textbox)
+checkInputTextbox(textbox) //validate reentered data
 }
-
 
 }
 

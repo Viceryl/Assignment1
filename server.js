@@ -1,41 +1,29 @@
-
-
-
+// declare express and nodee tools
 const express = require('express');
 const app = express();
 
-//
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const qs = require('qs');
-app.use(express.static(__dirname + '/public'));
-app.all('*', function (request, response, next) {
+//
+
+app.use(express.static(__dirname + '/public')); // express use public directory
+
+//Create path for all requests to log requests
+app.all('*', function (request, response, next) { 
     console.log(request.method + ' to ' + request.path);
     next();
 });
-//
 
+//call product.js from products.json
 const products = require(__dirname + '/products.json');
-
 app.get('/products.js', function (request, response, next) {
     response.type('.js');
     const products_str = `let products = ${JSON.stringify(products)};`;
     response.send(products_str);
 });
-
-//Chatgpt
-/*
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-
-const qs = require('qs');
-app.use(express.static(__dirname + '/public'));
-*/
-
-
-
 
 app.post("/quantity_check", (req, res) => {
     const inputValue = req.body.input;
@@ -55,27 +43,27 @@ return "Purchase Limit";
 } else { return " "}
 }
 
-app.post("/process_purchase", function(request, response){
+//Process purchase
+app.post("/process_purchase", function(request, response){//set up request path
 
-let POST=request.body;
-let hasqty = false;
-let errorObject=[];
+  //declare key variables
+  let POST=request.body;//retrive data form post
+  let hasqty = false;
+  let errorObject=[];
 
-
-for (let i in products){
-    let qty=POST[`qty${i}`];
-    hasqty = hasqty||(qty>0);
-    let errormessage = Validateinput(qty, products[i].qty_available)
+//loop input validation
+  for (let i in products){
+      let qty=POST[`qty${i}`];
+      hasqty = hasqty||(qty>0);
+      let errormessage = Validateinput(qty, products[i].qty_available)
     
     if (errormessage.length>0){
-    errorObject.push(errormessage)
+    errorObject.push(errormessage)// gather error meassage in an array
+    }
 
-    console.log(errormessage + "1")}
-}
-
-
-if (hasqty== true && Object.keys(errorObject).length == 0){
-    for (let i in products){
+  //Determine redirect location
+    if (hasqty== true && Object.keys(errorObject).length == 0){
+      for (let i in products){
         let qty=POST[`qty${[i]}`];
 
         products[i].qty_sold+=Number(qty)
@@ -84,20 +72,19 @@ if (hasqty== true && Object.keys(errorObject).length == 0){
         products[i].qty_available=products[i].qty_available - qty;
 
 
+      }
+    response.redirect("/invoice.html?valid&" + qs.stringify(POST)) //go to invoice if there are no error
+    } 
+    else {response.redirect("./RPD.html?" + qs.stringify(POST));
     }
-    response.redirect("/invoice.html?valid&" + qs.stringify(POST))
-} 
-else {response.redirect("./RPD.html?" + qs.stringify(POST));
-}
+  }
+} )
 
-}
-)
-
+//app listeners
 app.addListener
-
-
 app.listen(8080, () => console.log('Listening on port 8080'));
 
+//validation function clientside
 function Validateinput(quantity){
     quantity=Number(quantity)
     if (isNaN(quantity)) {

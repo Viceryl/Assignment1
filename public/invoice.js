@@ -1,4 +1,4 @@
-// Get the URL
+// Get the URL-Extract parameters to params-Var
 let params = (new URL(document.location)).searchParams;
 
 // On load, if there is no 'valid' key, redirect the user back to the Home page
@@ -58,11 +58,6 @@ for (let i in qty) {
     `;
 }
  
-
-/*   <div class="icon-container">
-          </div>
-
-*/
 function showPopup(element) {
     let idd=element.id
     let popup = document.getElementById(`${idd}-popup`);
