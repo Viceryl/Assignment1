@@ -24,8 +24,6 @@ app.get('/products.js', function (request, response, next) {
     response.send(products_str);
 });
 
-
-
 //Process purchase
 app.post("/process_purchase", function(request, response){//set up request path
 
