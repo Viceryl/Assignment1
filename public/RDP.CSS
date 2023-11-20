@@ -1,14 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Jost|Actor|Alef');
 
-body {
-    font-family: 'Jost', 'Actor', 'Alef', Helvetica, Arial, sans-serif;
-    margin: 0 auto;
-    font-size: 20px;
-    overflow: auto;
-    position: relative;
-    background-color: lightcoral;
-    color: blue;
+body{
+    background-color: black;
 }
+.productarea{
+fill: blue;}
+
+
+.product_container{
+    margin: auto;
+    width: 80%;
+  border: 3px solid rgb(255, 255, 255);
+  padding: 10px;
+background-color: rgb(255, 255, 255);
+}
+
+
+
+.title_div{
+    background-color: rgb(249, 164, 227);
+    padding-top:5% ;
+}
+
 
 #footer {
     position: absolute;
@@ -22,6 +35,11 @@ img {
 }
 .img-thumbnail {
     border: none;
+}
+.baller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Header styling */
@@ -69,8 +87,9 @@ header {
     width: 100%;
     z-index: 2;
 }
-
-
+.sticky + .container {
+    padding-top: 90px;
+}
 
 .inputBox {
     border: none;
