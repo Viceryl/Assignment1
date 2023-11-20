@@ -2,6 +2,8 @@
 // Populate Store Front
 
 //use loop to generate html with reference to product data 
+document.querySelector('.row').innerHTML=" "
+
 for (let i = 0; i < products.length; i++) {
     document.querySelector('.row').innerHTML += `
                                         <!-- Product Card Section-->
@@ -21,21 +23,21 @@ for (let i = 0; i < products.length; i++) {
                 <table style="width: 100%; text-align: center; font-size: 18px;" id="product_table">
                     <tr>
                     <!-- Table data (Amount Available) -->
-                        <td style="text-align: left; width: 35%;">Available: ${products[i].qty_available}</td>
+                        <td id="qty_available${i}" class="qty_card";">Available: ${products[i].qty_available}</td>
                     <!-- Table data (Column2 Area) -->
                         <td style="text-align: center; width: 35%;" rowspan="2">
-
+                        <span id="qty_available${i}>
                         <!-- Cool Rounded "DIV" section (Order Bar Elements)-->
                         <div style="border-radius: 50px; border: 2px solid black; width: 70%; height: 40px; float: right;" id="qty${[i]}Round">
                            
                         <!-- Subtract button -->
-                            <button type="button" style="float: left;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value--; checkInputTextbox(qty${[i]}_entered);">--</button>
+                            <button type="button" style="float: left;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value--; checkInputTextbox(qty${[i]}_entered) ;checkserver();">-</button>
 
                             <!-- Quantity input box -->
-                            <input type="text" style="width:50%;" autocomplete="off" placeholder="0" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this)";>
+                            <input type="text" style="width:50%;" autocomplete="off" placeholder="0" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this); checkserver()";>
 
                             <!-- Add button -->
-                            <button type="button" style="float:right;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value++; checkInputTextbox(qty${[i]}_entered)">+</button>
+                            <button type="button" style="float:right;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value++; checkInputTextbox(qty${[i]}_entered); checkserver()";>+</button>
 
                          </div>
 
@@ -59,6 +61,43 @@ for (let i = 0; i < products.length; i++) {
     `;
 }
 
+//Update Stock data dynamically from server on key up
+function checkserver() {
+    fetch('sold')
+      .then(response => response.text()) // Use response.text() because the server sends plain JavaScript
+      .then(data => {
+                    //Assuming the server sends a JavaScript string as the response
+        eval(data); // Evaluate the JavaScript string to define the 'products' variable
+        let dataclean=data.slice(1,-1) 
+        let Nsold=dataclean.split(",")
+
+        for(i in products){
+        document.getElementById(`qty_sold${i}`).innerHTML=`Sold: ${Nsold[i]}`;
+          }
+        })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+      fetch('stock')
+      .then(response => response.text()) // Use response.text() because the server sends plain JavaScript
+      .then(data => {
+        // Assuming the server sends a JavaScript string as the response
+        eval(data); // Evaluate the JavaScript string to define the 'products' variable
+        let dataclean=data.slice(1,-1)
+        let Nstock=dataclean.split(",")
+
+        for(i in products){
+        document.getElementById(`qty_available${i}`).innerHTML=`Available: ${Nstock[i]}`;
+        }
+       
+    })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+  }
+//----------------------------------
 
 // fuction to validate input and quantity data
 

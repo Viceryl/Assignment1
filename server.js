@@ -24,6 +24,29 @@ app.get('/products.js', function (request, response, next) {
     response.send(products_str);
 });
 
+
+
+////Update sold data on key/////////////
+app.get('/sold', function (request, response,) { //make get route
+
+let Nsold=[]     //gather sold data in array
+for(i in products){
+  Nsold.push(products[i].qty_sold)
+}
+  response.send(Nsold); //send array back to page as string
+});
+
+////Update stock data on key/////////////
+app.get('/stock', function (request, response,) {//make get route
+
+  let Nstock=[]    //gather stock data as array
+  for(i in products){
+    Nstock.push(products[i].qty_available)
+  }
+  response.send(Nstock); //send array to back to RPD.js as a string
+});
+
+
 //Process purchase
 app.post("/process_purchase", function(request, response){//set up request path
 
@@ -36,7 +59,7 @@ app.post("/process_purchase", function(request, response){//set up request path
   for (let i in products){
       let qty=POST[`qty${i}`];
       hasqty = hasqty||(qty>0);
-      let errormessage = Validateinput(qty, products[i].qty_available)
+      let errormessage = Validateinput(qty, Number(products[i].qty_available))
     
     if (errormessage.length>0){
     errorObject.push(errormessage)// gather error meassage in an array
