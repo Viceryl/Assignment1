@@ -60,33 +60,6 @@ for (let i = 0; i < products.length; i++) {
 }
 
 
-function sendToServer(Data) {
-    console.log("a")
-         // Get the input value
-        let inputValue = Data.value;
-        let source = Data.id
-        console.log(inputValue)
-        console.log(Data.id)
-
-        // Use Fetch API to send a POST request
-        fetch("/quantity_check", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ input: inputValue}),
-                     
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Server response:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-        
-    }
 
 // fuction to validate input and quantity data
 
