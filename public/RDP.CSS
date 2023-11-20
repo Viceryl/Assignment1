@@ -23,11 +23,6 @@ img {
 .img-thumbnail {
     border: none;
 }
-.baller {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 /* Header styling */
 header {
@@ -74,16 +69,8 @@ header {
     width: 100%;
     z-index: 2;
 }
-.sticky + .container {
-    padding-top: 90px;
-}
 
 
-/* Product card styling */
-.container {
-    text-align: center;
-    position: relative;
-}
 
 .inputBox {
     border: none;
