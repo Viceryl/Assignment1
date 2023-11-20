@@ -3,8 +3,6 @@ let params = (new URL(document.location)).searchParams;
 
 // On load, if there is no 'valid' key, redirect the user back to the Home page
 window.onload = function() {
-    document.write(params.has('valid')
-    )
     if (!params.has('valid')) {
         document.write(`
             <head>

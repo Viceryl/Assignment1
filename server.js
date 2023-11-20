@@ -41,28 +41,26 @@ app.post("/process_purchase", function(request, response){//set up request path
     if (errormessage.length>0){
     errorObject.push(errormessage)// gather error meassage in an array
     }
-
+    }
   //Determine redirect location
     if (hasqty== true && Object.keys(errorObject).length == 0){
       for (let i in products){
         let qty=POST[`qty${[i]}`];
 
         products[i].qty_sold+=Number(qty)
-
-
         products[i].qty_available=products[i].qty_available - qty;
-
-
       }
     response.redirect("/invoice.html?valid&" + qs.stringify(POST)) //go to invoice if there are no error
     } 
-    else {response.redirect("./RPD.html?" + qs.stringify(POST));
-    }
-  }
-} )
 
-//app listeners
-app.addListener
+    else {console.log("a")
+      response.redirect("./RPD.html?" + qs.stringify(POST));
+    }
+
+  }
+)
+
+
 app.listen(8080, () => console.log('Listening on port 8080'));
 
 //validation function clientside

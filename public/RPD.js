@@ -32,10 +32,10 @@ for (let i = 0; i < products.length; i++) {
                             <button type="button" style="float: left;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value--; checkInputTextbox(qty${[i]}_entered);">--</button>
 
                             <!-- Quantity input box -->
-                            <input type="text" style="width:50%;" autocomplete="off" placeholder="0" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this); sendToServer(qty${[i]}_entered)">
+                            <input type="text" style="width:50%;" autocomplete="off" placeholder="0" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this)";>
 
                             <!-- Add button -->
-                            <button type="button" style="float:right;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value++; checkInputTextbox(qty${[i]}_entered); sendToServer(qty${[i]}_entered)">+</button>
+                            <button type="button" style="float:right;" class="qtyButton highlight" onclick="document.getElementById('qty${[i]}_entered').value++; checkInputTextbox(qty${[i]}_entered)">+</button>
 
                          </div>
 
@@ -58,7 +58,6 @@ for (let i = 0; i < products.length; i++) {
         </div>
     `;
 }
-
 
 
 // fuction to validate input and quantity data
