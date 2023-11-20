@@ -138,10 +138,3 @@ checkInputTextbox(textbox) //validate reentered data
 }
 
 }
-
-//input box onchange
-
-// GET CLient
-
-//in invoicejs
-// use black magic to capture url parameters

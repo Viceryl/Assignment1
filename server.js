@@ -53,7 +53,7 @@ app.post("/process_purchase", function(request, response){//set up request path
     response.redirect("/invoice.html?valid&" + qs.stringify(POST)) //go to invoice if there are no error
     } 
 
-    else {console.log("a")
+    else {
       response.redirect("./RPD.html?" + qs.stringify(POST)); //redirect to Products page if error
     }
 
