@@ -1,0 +1,57 @@
+[
+    {
+        "name":"Inu",
+        "price":5,
+        "image":"/images/inu.jpeg",
+        "qty_available":100,
+        "qty_sold":0,
+        "details":"Adorable dog plushie"
+    } 
+,
+    {
+        "name":"Neko",
+        "price":5,
+        "image":"/images/NekoP.jpeg",
+        "qty_available":100,
+        "qty_sold":0,
+        "details":"Adorable cat plushie"
+        
+    }
+,
+    {
+        "name":"Kitsune",
+        "price":100,
+        "image":"/images/Kitsune.jpeg",
+        "qty_available":100,
+        "qty_sold":0,
+        "details":"Adorable fox plushie"
+    }
+,
+    {
+        "name":"Tanuki",
+        "price":50,
+        "image":"/images/Tanuki.jpeg",
+        "qty_available":100,
+        "qty_sold":0,
+        "details":"Adorable tanuki plushie"
+    }
+,
+    {
+        "name":"Kuma",
+        "price":1,
+        "image":"/images/Kuma.jpeg",
+        "qty_available":100,
+        "qty_sold":0,
+        "details":"Adorable bear plushie"
+
+    }
+,
+    {
+        "name":"[Limited Edition] Tiamat",
+        "price": 200,
+        "image":"/images/Tiamat.jpeg",
+        "qty_available":20,
+        "qty_sold":0,
+        "details":"Adorable dragon god plushie"
+    }
+]
